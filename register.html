@@ -1,1 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Birla Hackathon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
 
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .form-container h2 {
+            color: #007bff;
+        }
+
+        .form-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group input[type="submit"] {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background: #0056b3;
+            transform: translateY(-5px);
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Register for Birla Hackathon</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required>
+                        <option value="student">Student</option>
+                        <option value="professional">Professional</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Register">
+                </div>
+                <div class="error" id="error"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var category = document.getElementById('category').value;
+            var error = document.getElementById('error');
+
+            if (name === '' || email === '' || phone === '' || category === '') {
+                error.textContent = 'All fields are required.';
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                error.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            if (!validatePhone(phone)) {
+                error.textContent = 'Please enter a valid phone number.';
+                return;
+            }
+
+            error.textContent = '';
+            alert('Registration successful!');
+            // Here you can add code to submit the form data to the server
+        });
+
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            var re = /^\d{10}$/;
+            return re.test(phone);
+        }
+    </script>
+</body>
+</html>
